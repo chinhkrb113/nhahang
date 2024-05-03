@@ -1,0 +1,137 @@
+<p-toast></p-toast>
+<p-card class="card">
+   
+
+    <p-table #dt [value]="listBlog" [rows]="10" [paginator]="true" [globalFilterFields]="['title','name']" [tableStyle]="{'min-width': '75rem'}"
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Quản lý bài viết</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Tìm kiếm" />`
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Người Lớn</th>
+                <th>Trẻ em</th>
+                <th>Ngày đến</th>
+                <th>Giờ</th>
+                <th>Gmail</th>
+                <th>Sđt</th>
+                <th>Tên</th>
+                <th>Ghi chú</th>
+
+               
+                <th style="min-width:10rem">Tuỳ Chỉnh</th>
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-blog>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="blog"></p-tableCheckbox>
+                </td>
+                <td>{{blog.nguoilon}}</td>
+                <td>{{blog.treem}}</td>
+             
+                <td>{{blog.ngayden | date: 'dd/MM/yyyy'}}</td>
+                <td>{{blog.gioden }}</td>
+                <td>{{blog.gmail}}</td>
+                <td>{{blog.sdt}}</td>
+                <td>{{blog.ten}}</td>
+                <td>{{blog.ghichu}}</td>
+
+
+                
+                
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary mr-2" (click)="showUpdate(blog)" ></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"  (click)="showDelete(blog.id,blog.title)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                <!-- In total there are {{products ? products.length : 0 }} products. -->
+            </div>
+        </ng-template>
+    </p-table>
+
+</p-card>
+
+
+
+<p-dialog [(visible)]="showForm" [style]="{width: '70vw'}" header="Bài Viết" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <!-- <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
+        <div class="field">
+            <label for="name">Người Lớn</label>
+            <input type="number" pInputText id="title" [(ngModel)]="blogForm.nguoilon" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">Trẻ em</label>
+            <input type="number" pInputText id="title" [(ngModel)]="blogForm.treem" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">Ngày Đến</label>
+            <input type="date" pInputText id="title" [(ngModel)]="blogForm.ngayden" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">Giờ đến</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.gioden" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">Gmail</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.gmail" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">Sdt</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.sdt" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">tên</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.ten" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="field">
+            <label for="name">ghi chú</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.ghichu" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+
+        
+       
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button type="submit" pButton *ngIf="!onUpdate" (click)="createBlog()">Tạo mới</button>
+        <button type="submit" pButton *ngIf="onUpdate" (click)="updateBlog()" >Cập nhật</button>
+        <button pButton type="button" class="p-button-danger ml-3" (click)="showForm=false">Hủy</button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Xác nhận" [(visible)]="onDelete" [style]="{width :'30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+    <div>
+        <i class="pi pi pi-exclamation-triangle"></i>
+        <span class="ml-2">Bạn có chắc xóa <span>{{blogForm.title}}</span> ?</span>
+    </div>
+    <div class="flex justify-content-end mt-3">
+        <p-button label="Yes" icon="pi pi-check" class="mr-2" (click)="deleteBlog()"></p-button>
+        <p-button label="No" icon="pi pi-times" (click)="onDelete=false"></p-button>
+    </div>
+</p-dialog>
