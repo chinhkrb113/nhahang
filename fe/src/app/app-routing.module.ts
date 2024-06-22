@@ -103,6 +103,14 @@ const routes: Routes = [
       {path:'datban',component:QuanlydatbanComponent},
     ]
   },
+  // {
+  //   path:'client', component: IndexComponent,
+  //   canActivate: [RoleGuardService],
+  //   data: {expectedRole: "ROLE_MODERATOR"},
+  //   children:[
+  //     {}
+  //   ]
+  // },
   {
     path:'',component: IndexComponent,
     children:[

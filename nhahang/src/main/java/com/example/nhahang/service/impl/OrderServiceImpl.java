@@ -6,11 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.example.nhahang.util.EmailUtil;
 import com.example.nhahang.entity.Category;
 import com.example.nhahang.entity.Image;
 import com.example.nhahang.entity.Order;
@@ -44,6 +47,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderstatusRepository orderstatusRepository;
     
+    @Autowired
+    private EmailUtil emailUtil;
     @Override
     public void placeOrder(CreateOrderRequest request) {
         // TODO Auto-generated method stub
@@ -119,9 +124,24 @@ public class OrderServiceImpl implements OrderService {
     	Order order= orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Not Found Product With Id: " + id));
     	
     	Orderstatus orderstatus = orderstatusRepository.findById(request.getStatus()).orElseThrow(()-> new NotFoundException("Not Found Category With Id: " + request.getStatus()));
-    	order.setOrderstatus(orderstatus);  
-    	orderRepository.save(order);
 
+        if (request.getStatus() == 4) {
+            try {
+            emailUtil.sendStatus(order.getEmail(), "đơn hàng đã huỷ");
+            } catch (MessagingException e) {
+          throw new RuntimeException("please try again");
+        }
+        }
+        if (request.getStatus() == 2) {
+            try {
+            emailUtil.sendStatus(order.getEmail(), "Đơn hàng đã giao thành công");
+            } catch (MessagingException e) {
+          throw new RuntimeException("please try again");
+        }
+        }
+
+        order.setOrderstatus(orderstatus);  
+    	orderRepository.save(order);
         return order;
     }
     @Override

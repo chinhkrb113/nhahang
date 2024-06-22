@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ import com.example.nhahang.repository.ImageRepository;
 import com.example.nhahang.repository.TagRepository;
 import com.example.nhahang.repository.UserRepository;
 import com.example.nhahang.service.DatbanService;
+import com.example.nhahang.util.EmailUtil;
 
 @Service
 public class DatbanServiceImpl implements DatbanService {
@@ -38,6 +41,9 @@ public class DatbanServiceImpl implements DatbanService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailUtil emailUtil;
 
     @Override
     public List<Datban> getList() {
@@ -96,6 +102,13 @@ public class DatbanServiceImpl implements DatbanService {
     public void deleteDatban(long id) {
         // TODO Auto-generated method stub
     	Datban datban = datbanRepository.findById(id).orElseThrow(() -> new NotFoundException("Not Found Blog"));
+
+            try {
+            emailUtil.sendCancel(datban.getGmail(), "Nhân viên đã huỷ đặt bàn, vui lòng liên hệ nhà hàng để biết thêm chi tiết.");
+            } catch (MessagingException e) {
+          throw new RuntimeException("please try again");
+        }
+    
      
        datbanRepository.delete(datban);
     }

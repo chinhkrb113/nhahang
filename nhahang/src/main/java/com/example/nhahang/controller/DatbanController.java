@@ -68,9 +68,10 @@ public class DatbanController {
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary="Xóa blog bằng Id")
-    public ResponseEntity<?> delete(@PathVariable long id){
+    public ResponseEntity<?> delete(@PathVariable long id ){
         datbanService.deleteDatban(id);
         return ResponseEntity.ok(new MessageResponse("Delete success"));
     }
+
     
 }

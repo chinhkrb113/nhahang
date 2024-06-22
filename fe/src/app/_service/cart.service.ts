@@ -50,14 +50,14 @@ export class CartService {
 
     // Check if the product is already in the cart
     this.items.forEach(res => {
-        if (res.id === item.id && res.color === item.color && res.size === item.size && res.room === item.room) {
-            res.soluong += quantity; // Increase quantity if the same product with the same color exists
+        if (res.id === item.id && res.size === item.size && res.room === item.room) {
+            res.soluong += quantity; 
             res.subTotal = res.soluong * res.price; // Recalculate subtotal
             found = true; // Set found to true
         }
     });
 
-    // If the product is not found in the cart or has a different color
+
     if (!found) {
         const newItem = { ...item }; // Create a new object to prevent mutating the original object
         newItem.soluong = quantity; // Set quantity for the new item
@@ -73,7 +73,7 @@ export class CartService {
 
   updateCart(item:any,quantity: number){
     this.items.forEach(res =>{
-      if(res.id == item.id && res.color === item.color && res.size === item.size && res.room === item.room){
+      if(res.id == item.id && res.size === item.size && res.room === item.room){
         res.soluong = quantity;
         res.subTotal = res.soluong * res.price;
       }

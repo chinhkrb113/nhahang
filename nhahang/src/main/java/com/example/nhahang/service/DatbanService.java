@@ -14,4 +14,5 @@ public interface DatbanService {
 	Datban updateDatban(long id,CreateDatbanRequest request);//sửa
 
     void deleteDatban(long id);//xóa
+
 }

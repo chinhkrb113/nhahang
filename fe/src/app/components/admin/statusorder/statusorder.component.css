@@ -1,25 +1,31 @@
-/* CSS để áp dụng cho trạng thái "Chờ Xác Nhận" */
+/* CSS để áp dụng cho trạng thái "Yêu cầu đang được xử lý" */
 .waiting-confirm {
-    background-color: rgb(234, 234, 141); /* Màu nền */
-    color: black; /* Màu chữ */
+    background-color: rgb(71, 71, 230); 
+    color: white; /* Màu chữ */
 }
 
-/* CSS để áp dụng cho trạng thái "Chờ Lấy Hàng" */
+/* CSS để áp dụng cho trạng thái "Món ăn đang được chuẩn bị" */
 .waiting-pickup {
-    background-color: rgb(235, 190, 108);
+    background-color: rgb(71, 71, 230);
     color: white;
 }
 
-/* CSS để áp dụng cho trạng thái "Chờ Giao Hàng" */
+/* CSS để áp dụng cho trạng thái "Món ăn đã lên" */
 .waiting-delivery {
     background-color: rgb(71, 71, 230);
     color: white;
 }
 
-/* CSS để áp dụng cho trạng thái "Đã Giao" */
+/* CSS để áp dụng cho trạng thái "Đã thanh toán" */
 .delivered {
-    background-color: rgb(30, 194, 30);
+    background-color: #04AA6D;
     color: white;
+}
+
+.delivered.p-button:enabled:hover {
+    background-color: #03764c;
+    border: 1px solid;
+
 }
 
 /* CSS để áp dụng cho trạng thái "Đã Hủy" */
@@ -28,14 +34,34 @@
     color: white;
 }
 
-/* CSS để áp dụng cho trạng thái "Trả Hàng" */
+.cancelled.p-button:enabled:hover {
+    background-color: rgb(198, 37, 37);
+    border: 1px solid;
+
+}
+
+/* CSS để áp dụng cho trạng thái "Đổi món" */
 .returned {
-    background-color: rgb(193, 63, 193);
+    background-color: rgb(71, 71, 230);
     color: white;
 }
 
 /* CSS để áp dụng cho trạng thái "Lỗi Hệ Thống" */
 .system-error {
-    background-color: rgb(244, 237, 29);
+    background-color: rgb(230, 62, 62);
     color: white;
+}
+
+.p-button:enabled:hover {
+    background-color: rgb(53, 53, 212);
+    border: 1px solid;
+}
+
+.system-error.p-button:enabled:hover {
+    background-color: rgb(198, 37, 37);
+    border: 1px solid;
+}
+
+.p-button {
+    border: 1px solid;
 }

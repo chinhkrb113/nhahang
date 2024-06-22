@@ -217,7 +217,10 @@ export class QuanlydatbanComponent implements OnInit {
         this.showError(err.message);
       }
     })
+  
   }
+
+
 
   selectImage(event : any,res: any){
     let data = document.querySelectorAll('.list-image img');
@@ -245,4 +248,8 @@ export class QuanlydatbanComponent implements OnInit {
   showWarn(text : string) {
     this.messageService.add({severity:'warn', summary: 'Warn', detail: text});
   }
+
+
 }
+
+

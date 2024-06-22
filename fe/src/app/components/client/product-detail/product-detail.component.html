@@ -58,7 +58,8 @@
                         </li>
                         <!-- size -->
 
-                        <li *ngIf="product.category.id === 1 || product.category.id === 2 ||product.category.id === 13 || product.category.id === 12 ||product.category.id === 21 || product.category.id === 4 " >
+                        <li *ngIf ="product.productsizes.length != 0" > 
+                        <!-- <li *ngIf="product.category.id === 1 || product.category.id === 2 ||product.category.id === 13 || product.category.id === 12 ||product.category.id === 21 || product.category.id === 4 " > -->
                             <b>SIZE:</b>  
                             <div class="sidebar__item__size" >
                                 <label 
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <a>Số lượng : <b>{{product.quantity}}</b> món ăn có sẵn</a><br>  <br>
+                    <a> Số lượng : <b>{{product.quantity}}</b> </a><br>  <br>
                     <a href="javascript:void(0)" class="primary-btn" (click)="addCart(product)">Thêm vào đơn đặt hàng</a>
                         
                        

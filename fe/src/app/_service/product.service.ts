@@ -30,7 +30,7 @@ export class ProductService {
     return this.http.get(PRODUCT_API + 'price',httpOptions);
   }
 
-  getListRelatedProduct(id: number):Observable<any>{
+  getListRelatedProduct(id: number):Observable<any>{ // lấy danh sách sản phẩm liên quan
     return this.http.get(PRODUCT_API + 'related/' + id,httpOptions);
   }
 

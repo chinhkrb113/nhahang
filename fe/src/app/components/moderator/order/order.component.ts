@@ -35,7 +35,7 @@ export class OrderComponent2 implements OnInit {
     this.getListOrder();
   }
 
-
+ 
   getListOrder(){
     this.orderService.getListOrder().subscribe({
       next: res=>{

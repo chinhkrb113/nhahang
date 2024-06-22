@@ -56,21 +56,21 @@ export class ChartsComponent {
       this.data = {
         labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
         datasets: [
-            {
-                label: 'Món Ăn',
-                fill: false,
-                borderColor: documentStyle.getPropertyValue('--blue-500'),
-                yAxisID: 'y',
-                tension: 0.4,
-                data: [65, 59, 80, 81, 56, 55, 10, 1, 56, 55, 10,50]
-            },
+            // {
+            //     label: 'Món Ăn',
+            //     fill: false,
+            //     borderColor: documentStyle.getPropertyValue('--blue-500'),
+            //     yAxisID: 'y',
+            //     tension: 0.4,
+            //     data: [65, 59, 80, 81]//, 56, 55, 10, 1, 56, 55, 10,50]
+            // },
             {
                 label: 'Doanh Thu',
                 fill: false,
                 borderColor: documentStyle.getPropertyValue('--green-500'),
                 yAxisID: 'y1',
                 tension: 0.4,
-                data: [28, 48, 40, 19, 86, 27, 90, 19, 48, 40, 19,90]
+                data: [28, 48, 40, 19]//, 86, 27, 90, 19, 48, 40, 19,90]
             }
         ]
     };

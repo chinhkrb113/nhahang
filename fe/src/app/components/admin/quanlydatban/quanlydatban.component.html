@@ -55,6 +55,7 @@
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-primary mr-2" (click)="showUpdate(blog)" ></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"  (click)="showDelete(blog.id,blog.title)"></button>
                 </td>
+
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
@@ -131,7 +132,8 @@
         <span class="ml-2">Bạn có chắc xóa <span>{{blogForm.title}}</span> ?</span>
     </div>
     <div class="flex justify-content-end mt-3">
-        <p-button label="Yes" icon="pi pi-check" class="mr-2" (click)="deleteBlog()"></p-button>
+
+        <p-button label="Hết Bàn"  class="mr-2" (click)="deleteBlog()"></p-button>
         <p-button label="No" icon="pi pi-times" (click)="onDelete=false"></p-button>
     </div>
 </p-dialog>

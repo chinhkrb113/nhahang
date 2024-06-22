@@ -27,6 +27,9 @@
                 <th pSortableColumn="address">Địa Chỉ
                     <p-sortIcon field="address"></p-sortIcon>
                 </th>
+                <th pSortableColumn="address">Ghi chú
+                    <p-sortIcon field="note"></p-sortIcon>
+                </th>
                 <!-- <th pSortableColumn="town">Town/City <p-sortIcon field="town"></p-sortIcon></th>
                 <th pSortableColumn="state">Country/State<p-sortIcon field="state"></p-sortIcon></th> -->
                 <!-- <th pSortableColumn="postcode">Postcode/Zip <p-sortIcon field="postcode"></p-sortIcon></th> -->
@@ -55,6 +58,7 @@
                 <td>{{order.firstname}} {{order.lastname}}</td>
                 <td>{{order.country}}</td>
                 <td>{{order.address}}</td>
+                <td>{{order.note}}</td>
                 <td>{{order.phone}}</td>
                 <td>{{order.email}}</td>
                 <td>{{order.totalPrice | currency:'VND'}}</td>

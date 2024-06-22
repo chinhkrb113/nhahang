@@ -38,7 +38,7 @@ export class DatBanService {
   }
 
   deleleDatban(id: number){
-    return this.http.delete(DATBAN_API + 'delete/' + id,httpOptions);
+    return this.http.delete(DATBAN_API + 'delete/' +id,httpOptions);
   }
 
 }

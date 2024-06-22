@@ -14,7 +14,7 @@ public class EmailUtil {
 	  private JavaMailSender javaMailSender;
 	public void sendOtpEmail(String email, String verificationCode) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true, "utf-8");
 
         String emailContent = "<div>"
         		  + "<p>Mã OTP cua ban la: " + verificationCode + "</p>"
@@ -29,4 +29,37 @@ public class EmailUtil {
 
         javaMailSender.send(mimeMessage);
     }
+    public void sendStatus(String email, String status) throws MessagingException {
+      MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+      MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true, "utf-8");
+
+      String emailContent = "<div>"
+            +"<p> Cập nhật trạng thái đơn hàng: " + status +"</p>"
+              + "</div>";
+      
+
+      mimeMessageHelper.setTo(email);
+      mimeMessageHelper.setSubject("Status Order");
+      mimeMessageHelper.setText(emailContent, true);
+
+      javaMailSender.send(mimeMessage);
+  }
+
+  public void sendCancel(String email, String status) throws MessagingException {
+    MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+    MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true, "utf-8");
+
+    String emailContent = "<div>"
+          +"<p> Cập nhật trạng thái đặt bàn: " + status +"</p>"
+          +"<p> thông tin liên hệ: 0858453639 " + "</p>"
+            + "</div>";
+    
+
+    mimeMessageHelper.setTo(email);
+    mimeMessageHelper.setSubject("Status dat ban");
+    mimeMessageHelper.setText(emailContent, true);
+
+    javaMailSender.send(mimeMessage);
+}
+
 	}

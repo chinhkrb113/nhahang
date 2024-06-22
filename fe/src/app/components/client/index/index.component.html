@@ -81,19 +81,22 @@
                 <nav class="header__menu">
                     <ul>
 
-                        <li><a href="javascript:void(0)" routerLink="/">Trang Chủ</a></li>
-                        <li><a href="javascript:void(0)">Tìm hiểu</a>
+                        <li><a href="javascript:void(0)" routerLink="/">TRANG CHỦ</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/product">THỰC ĐƠN</a></li>
+                        <li><a href="javascript:void(0)" routerLink="/datban">ĐẶT BÀN</a></li>
+                        <li><a href="javascript:void(0)">XEM THÊM</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="javascript:void(0)" routerLink="/about">Giới Thiệu</a></li>
-                                <li><a href="javascript:void(0)" routerLink="/policy">Chính Sách</a></li>
-                                <li><a href="javascript:void(0)" routerLink="/product">Món Ăn</a></li>
-                                <li><a href="javascript:void(0)" routerLink="/cart">Đơn đặt món</a></li>
-                                
-                                <li><a href="javascript:void(0)" routerLink="/datban">Đặt bàn</a></li>
+                                <li><a href="javascript:void(0)" routerLink="/about">GIỚI THIỆU</a></li>
+
+                                <li><a href="javascript:void(0)" routerLink="/cart">ĐƠN ĐẶT MÓN</a></li>  
+                                <li><a href="javascript:void(0)" routerLink="/blog">BÀI VIẾT</a></li>
+                                <li><a href="javascript:void(0)" routerLink="/policy">CHÍNH SÁCH</a></li>
+
+                                <li><a href="javascript:void(0)" routerLink="/contact">LIÊN HỆ</a></li>
+
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0)" routerLink="/blog">Bài viết</a></li>
-                        <li><a href="javascript:void(0)" routerLink="/contact">Liên Hệ</a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -285,11 +288,11 @@
                     <h6>Hỗ Trợ</h6>
                     <ul *ngFor="let chi of policy">
                         <li><a href="javascript:void(0)">{{chi.title}}</a></li>
-                        <!-- <li><a href="javascript:void(0)">Về Shop</a></li>
+                        <!-- 
                         <li><a href="javascript:void(0)">Chính sách mua hàng</a></li>
                         <li><a href="javascript:void(0)">Chính sách đổi trả</a></li>
                         <li><a href="javascript:void(0)">Chính sách giao hàng</a></li>
-                        <li><a href="javascript:void(0)">Hướng dẫn mua hàng</a></li> -->
+                        <li><a href="javascript:void(0)">Hướng dẫn</a></li> -->
                     </ul>
                     <h6>Thông tin thêm</h6>
                     <ul *ngFor="let duoi of listpolicy">

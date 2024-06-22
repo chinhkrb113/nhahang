@@ -62,6 +62,6 @@
 
 /* CSS để áp dụng cho trạng thái "Lỗi Hệ Thống" */
 .system-error {
-  background-color: rgb(244, 237, 29);
+  background-color: red;
   color: white;
 }
