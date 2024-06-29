@@ -34,7 +34,7 @@ public class EmailUtil {
       MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true, "utf-8");
 
       String emailContent = "<div>"
-            +"<p> Cập nhật trạng thái đơn hàng: " + status +"</p>"
+            +"<h1><span style=\"font-weight: bold; color: #365E32;\">CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG</span> </h1>"+"<h3>" + status +"</h3>"
               + "</div>";
       
 
@@ -50,8 +50,9 @@ public class EmailUtil {
     MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true, "utf-8");
 
     String emailContent = "<div>"
-          +"<p> Cập nhật trạng thái đặt bàn: " + status +"</p>"
-          +"<p> thông tin liên hệ: 0858453639 " + "</p>"
+          +"<h1><span style=\"font-weight: bold; color: #365E32;\">CẬP NHẬT TRẠNG THÁI ĐẶT BÀN: </span> </h1>" + 
+          "<h3><span style=\" color: #FF0000;\">" + status +"</span> </h3>"
+          +"<h3> thông tin liên hệ: 0858453639 " + "</h3>"
             + "</div>";
     
 

@@ -33,6 +33,7 @@ import com.example.nhahang.repository.OrderstatusRepository;
 import com.example.nhahang.repository.UserRepository;
 import com.example.nhahang.service.OrderService;
 
+
 @Service
 public class OrderServiceImpl implements OrderService {
     
@@ -127,14 +128,30 @@ public class OrderServiceImpl implements OrderService {
 
         if (request.getStatus() == 4) {
             try {
-            emailUtil.sendStatus(order.getEmail(), "đơn hàng đã huỷ");
+                String emailContent = "<div>"
+                + "<p><span style=\"font-weight: bold;\">Hi " + order.getLastname() + ",</span></p>" 
+                + "Mã đơn hàng: "+ order.getId()  + " Tổng số tiền: " + order.getTotalPrice()
+                +"<p><span style=\"font-weight: bold; color: #FF0000;\">Chúng tôi rất tiếc về sự cố này: đơn hàng đã bị huỷ</span></p>"
+                + "<p>Vui lòng liên hệ với nhà hàng để biết thêm chi tiết.<p>"
+                + "<p>Phone: 0858453639<p>"
+                + "<p>Email: jinkaido27@gmail.com<p>"
+                + "</div>";
+            emailUtil.sendStatus(order.getEmail(),emailContent );
             } catch (MessagingException e) {
           throw new RuntimeException("please try again");
         }
         }
         if (request.getStatus() == 2) {
             try {
-            emailUtil.sendStatus(order.getEmail(), "Đơn hàng đã giao thành công");
+                String emailContent = "<div>"
+                + "<p><span style=\"font-weight: bold;\">Hi " + order.getLastname() + ",</span></p>" 
+                + "Mã đơn hàng: "+ order.getId()  + " Tổng số tiền: " + order.getTotalPrice()
+                +"<p><span style=\"font-weight: bold; color: #A1DD70;\">Đơn hàng đã giao thành công</span></p>"
+                + "<p>Vui lòng liên hệ với nhà hàng để biết thêm chi tiết.<p>"
+                + "<p>Phone: 0858453639<p>"
+                + "<p>Email: jinkaido27@gmail.com<p>"
+                + "</div>";
+            emailUtil.sendStatus(order.getEmail(), emailContent);
             } catch (MessagingException e) {
           throw new RuntimeException("please try again");
         }
