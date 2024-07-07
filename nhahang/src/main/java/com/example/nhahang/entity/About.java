@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "about")
-public class About {
+public class About { // Ánh xạ tới bản about
 	@Id
 	private String id;
 	private String title;

@@ -13,7 +13,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 //	}
 //
 //}
-// import thêm để deploy vps
 @SpringBootApplication
 public class NhahangApplication extends SpringBootServletInitializer{
 

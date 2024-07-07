@@ -33,11 +33,11 @@ import com.example.nhahang.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/auth")
-@CrossOrigin(origins = "*",maxAge = 3600)
+@RequestMapping("/api/auth") // Định nghĩa URL cơ sở cho tất cả các phương thức
+@CrossOrigin(origins = "*",maxAge = 3600) // Cho phép các yêu cầu từ bất kỳ nguồn nào (CORS) với thời gian tối đa lưu trữ kết quả CORS là 3600 giây.
 public class AuthController {
 
-    @Autowired
+    @Autowired // tự động tiêm phụ thuộc
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -46,18 +46,18 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
-    @Operation(summary="Đăng nhập")
+    @PostMapping("/login") // Định nghĩa phương thức xử lý yêu cầu HTTP
+    @Operation(summary="Đăng nhập") // Cung cấp mô tả ngắn gọn cho phương thức
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
-                        loginRequest.getPassword()));
+                        loginRequest.getPassword())); // xác thực thông tin và tạo đối tượng
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication); // Lưu đối tượng vào context bảo mật của spring
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();// lấy thông tin người dùng
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails); // tạo một JWT và lưu vào cookie
 
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
@@ -75,7 +75,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @Operation(summary="Đăng ký")
-    public ResponseEntity<?> register(@Valid @RequestBody CreateUserRequest request){
+    public ResponseEntity<?> register(@Valid @RequestBody CreateUserRequest request){ // chuyển chuỗi JSON trong request thành một Object Java
       
         userService.register(request);
       
