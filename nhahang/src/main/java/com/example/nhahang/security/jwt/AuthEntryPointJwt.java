@@ -25,18 +25,18 @@ private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.c
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
       throws IOException, ServletException {
-    logger.error("Unauthorized error: {}", authException.getMessage());
+    logger.error("Unauthorized error: {}", authException.getMessage()); // Ghi lại thông báo lỗi
 
-    response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    response.setContentType(MediaType.APPLICATION_JSON_VALUE); // Đặt loại nội dung phản hồi thành JSON.
+    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Đặt trạng thái phản hồi thành 401 (Không được phép).
 
-    final Map<String, Object> body = new HashMap<>();
+    final Map<String, Object> body = new HashMap<>(); // tạp map để lưu giữ dữ liệu nội dung phản hồi
     body.put("status", HttpServletResponse.SC_UNAUTHORIZED);
     body.put("error", "Unauthorized");
     body.put("message", authException.getMessage());
     body.put("path", request.getServletPath());
 
-    final ObjectMapper mapper = new ObjectMapper();
+    final ObjectMapper mapper = new ObjectMapper(); //ghi nội dung phản hồi dưới dạng JSON vào luồng đầu ra phản hồi.
     mapper.writeValue(response.getOutputStream(), body);
   }
     

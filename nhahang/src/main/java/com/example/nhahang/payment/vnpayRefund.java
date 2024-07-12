@@ -19,9 +19,9 @@ import com.example.nhahang.config.Config;
 import com.google.gson.JsonObject;
 
 public class vnpayRefund extends HttpServlet {
+    // Thực hiện hoàn tiền cho giao dịch -> Tạo dữ liệu băm và gửi yêu cầu POST tới URL API của VNPAY để thực hiện hoàn tiền.
 
     @Override
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //Command: refund

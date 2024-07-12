@@ -60,7 +60,7 @@ public class Config {
 	    }
 
 	    //Util for VNPAY
-	    public static String hashAllFields(Map fields) {
+	    public static String hashAllFields(Map fields) { // tạo chuỗi từ các trường của Map và tính toán giá trị băm HMAC SHA-512 cho chuỗi
 	        List fieldNames = new ArrayList(fields.keySet());
 	        Collections.sort(fieldNames);
 	        StringBuilder sb = new StringBuilder();
@@ -89,11 +89,11 @@ public class Config {
 	            final Mac hmac512 = Mac.getInstance("HmacSHA512");
 	            byte[] hmacKeyBytes = key.getBytes();
 	            final SecretKeySpec secretKey = new SecretKeySpec(hmacKeyBytes, "HmacSHA512");
-	            hmac512.init(secretKey);
-	            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
-	            byte[] result = hmac512.doFinal(dataBytes);
+	            hmac512.init(secretKey); // khởi tạo dối tượng Mac với khóa bí mật
+	            byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8); // chuyển đổi data thành mảng byte
+	            byte[] result = hmac512.doFinal(dataBytes); // tính toán giá trị băm cho dữ liệu đầu vào
 	            StringBuilder sb = new StringBuilder(2 * result.length);
-	            for (byte b : result) {
+	            for (byte b : result) { // đổi mảng byte thành chuỗi thập lục phân
 	                sb.append(String.format("%02x", b & 0xff));
 	            }
 	            return sb.toString();

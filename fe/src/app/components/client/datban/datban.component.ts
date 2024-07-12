@@ -25,7 +25,7 @@ export class DatbanComponent implements OnInit {
 
   DatBan() {
     // Kiểm tra các trường không được để trống hoặc null
-    if (this.nguoiLon > 0 &&this.treEm > 0 && this.ngayDen &&this.gioDen &&this.gmail &&this.sdt &&this.ten &&this.ghiChu) 
+    if (this.nguoiLon > 0 && this.ngayDen &&this.gioDen &&this.gmail &&this.sdt &&this.ten) 
     {
       // Gọi phương thức createDatban từ DatBanService và truyền tham số vào
       this.datBanService.createDatban(

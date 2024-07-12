@@ -94,7 +94,7 @@ public class OrderController {
     @Operation(summary="Xuất excel chi tiết đơn hàng")
     public ModelAndView exportToExcel(@PathVariable long id, HttpServletResponse response) {      
         List<Order> orders = orderService.getListOrder(id);
-        List<OrderDetail> orderDetails = oderdetailService.getOrderDetailsByOrderId(id); // Thay thế orderDetailService bằng tên service của bạn
+        List<OrderDetail> orderDetails = oderdetailService.getOrderDetailsByOrderId(id); 
 
         ModelAndView modelAndView = new ModelAndView(new OrderExcelExport(), "orders", orders);
         modelAndView.addObject("orderDetails", orderDetails); // Truyền danh sách orderDetails vào view
@@ -147,10 +147,11 @@ public class OrderController {
     public ResponseEntity<?> placeOrder(@RequestBody CreateOrderRequest request, HttpServletRequest httpServletRequest) {
         try {
             long total = 0;
-
+            // Tính tổng tiền
             for (CreateOrderDetailRequest orderDetail : request.getOrderDetails()) {
                 total += ((orderDetail.getPrice() * (orderDetail.getSoluong() >= 1 ? orderDetail.getSoluong() : 1)));
             }
+            // Thiết lập các thông số cho VNPAY
             String vnp_Version = "2.1.0";
             String vnp_Command = "pay";
             String orderType = "other";
@@ -163,6 +164,7 @@ public class OrderController {
 
             String vnp_TmnCode = Config.vnp_TmnCode;
 
+            // Tạo map chứa các tham số của VNPAY
             Map<String, String> vnp_Params = new HashMap<>();
             vnp_Params.put("vnp_Version", vnp_Version);
             vnp_Params.put("vnp_Command", vnp_Command);
@@ -178,6 +180,7 @@ public class OrderController {
             vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
             vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
+            // Thiết lập thời gian tạo và hết hạn của đơn hàng
             Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
             String vnp_CreateDate = formatter.format(cld.getTime());
@@ -187,12 +190,13 @@ public class OrderController {
             String vnp_ExpireDate = formatter.format(cld.getTime());
             vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
 
-            List fieldNames = new ArrayList(vnp_Params.keySet());
+            // xây dựng dữ liệu băm và query string
+            List fieldNames = new ArrayList(vnp_Params.keySet()); // Xây dựng danh sách các tham số
             Collections.sort(fieldNames);
-            StringBuilder hashData = new StringBuilder();
-            StringBuilder query = new StringBuilder();
+            StringBuilder hashData = new StringBuilder(); //dùng để gửi yêu cầu thanh toán đến VNPAY
+            StringBuilder query = new StringBuilder(); // dùng để xây dựng URL thanh toán
             Iterator itr = fieldNames.iterator();
-            while (itr.hasNext()) {
+            while (itr.hasNext()) { // Xây dựng chuỗi dữ liệu băm và chuỗi truy vấn
                 String fieldName = (String) itr.next();
                 String fieldValue = (String) vnp_Params.get(fieldName);
                 if ((fieldValue != null) && (fieldValue.length() > 0)) {
@@ -210,11 +214,12 @@ public class OrderController {
                     }
                 }
             }
+            // Tạo chữ ký bảo mật và URL thanh toán
             String queryUrl = query.toString();
             String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
             queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
             String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-            Map<String, Object> job = new HashMap<>();
+            Map<String, Object> job = new HashMap<>(); //Tạo phản hồi trả về:
             job.put("code", "00");
             job.put("message", "success");
             job.put("data", paymentUrl);

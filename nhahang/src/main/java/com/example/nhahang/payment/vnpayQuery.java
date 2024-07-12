@@ -19,9 +19,8 @@ import com.example.nhahang.config.Config;
 import com.google.gson.JsonObject;
 
 public class vnpayQuery extends HttpServlet {
-
+    //Kiểm tra kết quả giao dịch dựa trên mã đơn hàng và ngày giao dịch -> Tạo dữ liệu băm và gửi yêu cầu POST tới URL API của VNPAY để kiểm tra kết quả giao dịch
     @Override
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Command:querydr
 

@@ -24,4 +24,8 @@ export class ImageService {
   getList(){
     return this.http.get(IMAGE_API,httpOptions);
   }
+
+  deleteTag(id: number){
+    return this.http.delete(IMAGE_API + 'delete/' + id,httpOptions);
+  }
 }

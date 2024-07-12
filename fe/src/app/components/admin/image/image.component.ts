@@ -67,6 +67,19 @@ export class ImageComponent implements OnInit {
     this.tagForm.name = name;
   }
 
+  delete(){
+    const {id} = this.tagForm;
+    this.tagService.deleteTag(id).subscribe({
+      next: res =>{
+        this.getList();
+        this.showWarn("Xóa thành công!!");
+        this.deleteForm = false;
+      },error: err=>{
+        this.showError(err.message);
+      }
+    })
+  }
+
   // createTag(){
   //   const {name} = this.tagForm;
   //   this.tagService.createTag(name).subscribe({

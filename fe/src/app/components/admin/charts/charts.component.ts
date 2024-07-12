@@ -70,7 +70,7 @@ export class ChartsComponent {
                 borderColor: documentStyle.getPropertyValue('--green-500'),
                 yAxisID: 'y1',
                 tension: 0.4,
-                data: [28, 48, 40, 19]//, 86, 27, 90, 19, 48, 40, 19,90]
+                data: [0,0,0,0,3,1, 6.1 ]//, 86, 27, 90, 19, 48, 40, 19,90]
             }
         ]
     };

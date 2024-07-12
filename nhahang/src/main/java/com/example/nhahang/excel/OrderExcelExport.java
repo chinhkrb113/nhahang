@@ -65,7 +65,7 @@ public class OrderExcelExport extends AbstractXlsxView {
 
         // Tạo ô và thiết lập giá trị cho ô đó với style in đậm
         Cell headerCell = headerRow.createCell(0);
-        headerCell.setCellValue("Sàn Thương Mại Điện Tử TAZA");
+        headerCell.setCellValue("Restaurant");
         headerCell.setCellStyle(boldStyle);
 
 
@@ -109,31 +109,31 @@ public class OrderExcelExport extends AbstractXlsxView {
 
             Order status = orders.isEmpty() ? null : orders.get(0);
             if (status != null) {
-                String paymentMethod = "";
+                String orderstatuss = "";
                 Orderstatus orderStatusObject = status.getOrderstatus(); // Lấy đối tượng Orderstatus thông qua khóa ngoại
                 if (orderStatusObject != null) {
                     long orderStatusId = orderStatusObject.getId(); // Lấy trường id từ đối tượng Orderstatus
                     if (orderStatusId == 0) {
-                        paymentMethod = "Chờ Xác Nhận";
+                        orderstatuss = "Chờ Xác Nhận";
                     } else if (orderStatusId == 1) {
-                        paymentMethod = "Chờ Lấy Hàng";
+                        orderstatuss = "Chờ Lấy Hàng";
                     } else if (orderStatusId == 2) {
-                        paymentMethod = "Chờ Giao Hàng";
+                        orderstatuss = "Chờ Giao Hàng";
                     } else if (orderStatusId == 3) {
-                        paymentMethod = "Đã Giao";
+                        orderstatuss = "Đã Giao";
                     } else if (orderStatusId == 4) {
-                        paymentMethod = "Đã Hủy";
+                        orderstatuss = "Đã Hủy";
                     } else if (orderStatusId == 5) {
-                        paymentMethod = "Trả Hàng";
+                        orderstatuss = "Trả Hàng";
                     } else if (orderStatusId == 6) {
-                        paymentMethod = "Lỗi Hệ Thống";
+                        orderstatuss = "Lỗi Hệ Thống";
                     } else {
-                        paymentMethod = "Lỗi gì rồi";
+                        orderstatuss = "Lỗi gì rồi";
                     }
                 } else {
-                    paymentMethod = "Lỗi gì rồi";
+                    orderstatuss = "Lỗi gì rồi";
                 }
-                currentRow3.createCell(0).setCellValue("Phương thức thanh toán: " + paymentMethod);
+                currentRow3.createCell(0).setCellValue("Trạng thái đơn hàng: " + orderstatuss);
             }     
 
 
@@ -172,10 +172,10 @@ public class OrderExcelExport extends AbstractXlsxView {
             ma1.setCellValue("Tên Sản Phẩm");
             ma1.setCellStyle(boldStyle);
             Cell ma2 = currentRow5.createCell(2);
-            ma2.setCellValue("Giá");
+            ma2.setCellValue("Số Lượng");
             ma2.setCellStyle(boldStyle);
             Cell ma3 = currentRow5.createCell(3);
-            ma3.setCellValue("Số Lượng");
+            ma3.setCellValue("Giá");
             ma3.setCellStyle(boldStyle);
            
            

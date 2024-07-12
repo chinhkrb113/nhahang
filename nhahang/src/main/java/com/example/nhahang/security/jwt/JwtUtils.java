@@ -38,12 +38,12 @@ public class JwtUtils {
       }
     }
   
-    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) {
+    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal) { // tạo cookie
       String jwt = generateTokenFromUsername(userPrincipal.getUsername());
       System.out.println("JWT Token: " + jwt);
       logger.info("JWT Token: {}", jwt);
       ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24*60*60).httpOnly(true).build();
-      return cookie;
+      return cookie; // tạo cookie và set thời gian lưu tối đa là 24h
     }
   
     public ResponseCookie getCleanJwtCookie() {
@@ -55,9 +55,9 @@ public class JwtUtils {
       return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
   
-    public boolean validateJwtToken(String authToken) {
+    public boolean validateJwtToken(String authToken) { // xác thực 
       try {
-        Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+        Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken); // phân tích mẫ JWT
         return true;
       } catch (SignatureException e) {
         logger.error("Invalid JWT signature: {}", e.getMessage());
@@ -73,7 +73,7 @@ public class JwtUtils {
       return false;
     }
     
-    public String generateTokenFromUsername(String username) {   
+    public String generateTokenFromUsername(String username) {   // tạo JWT từ tên người dùng
       return Jwts.builder()
           .setSubject(username)
           .setIssuedAt(new Date())

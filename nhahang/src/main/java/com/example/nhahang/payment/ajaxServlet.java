@@ -23,21 +23,21 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class ajaxServlet extends HttpServlet {
-
+    //Tạo URL thanh toán cho đơn hàng -> Tạo query string và băm dữ liệu để tạo URL thanh toán
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        // Thiết lập các tham số cơ bản
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
         long amount = Integer.parseInt(req.getParameter("amount"))*100;
         String bankCode = req.getParameter("bankCode");
-        
-        String vnp_TxnRef = Config.getRandomNumber(8);
-        String vnp_IpAddr = Config.getIpAddress(req);
+        // tạo các tham số động
+        String vnp_TxnRef = Config.getRandomNumber(8); // Mã giao dịch
+        String vnp_IpAddr = Config.getIpAddress(req); // địa chỉ ip
 
-        String vnp_TmnCode = Config.vnp_TmnCode;
-        
+        String vnp_TmnCode = Config.vnp_TmnCode;// mã terminal của VNPAY
+        // Tạo map chứa các tham số của VNPAY
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
@@ -60,7 +60,7 @@ public class ajaxServlet extends HttpServlet {
         }
         vnp_Params.put("vnp_ReturnUrl", Config.vnp_ReturnUrl);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
-
+        // Thiết lập thời gian tạo và hết hạn của đơn hàng
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String vnp_CreateDate = formatter.format(cld.getTime());
@@ -69,7 +69,7 @@ public class ajaxServlet extends HttpServlet {
         cld.add(Calendar.MINUTE, 15);
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
-        
+        // xây dựng dữ liệu băm và query string
         List fieldNames = new ArrayList(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
